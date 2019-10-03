@@ -24,6 +24,9 @@ public class Products {
 
     }
 
+    public Products(int item_layout, String Nombre, String Codigo, String Cantidad) {
+    }
+
 
     public String getCodigo() {
         return Codigo;
