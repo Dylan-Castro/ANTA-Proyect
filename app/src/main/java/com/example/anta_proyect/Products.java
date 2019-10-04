@@ -1,5 +1,7 @@
 package com.example.anta_proyect;
 
+import android.content.ContentValues;
+
 public class Products {
 
     private String Codigo;
@@ -90,6 +92,19 @@ public class Products {
 
     public void setCantidadAlerta(String cantidadAlerta) {
         CantidadAlerta = cantidadAlerta;
+    }
+
+    public ContentValues toContentValues() {
+        ContentValues values = new ContentValues();
+        values.put(DataBase.ProductsEntry.Codigo, Codigo);
+        values.put(DataBase.ProductsEntry.Nombre, Nombre);
+        values.put(DataBase.ProductsEntry.Marca, Marca);
+        values.put(DataBase.ProductsEntry.Categoria, Categoria);
+        values.put(DataBase.ProductsEntry.Costo, Costo);
+        values.put(DataBase.ProductsEntry.PrecioVenta, PrecioVenta);
+        values.put(DataBase.ProductsEntry.Cantidad, Cantidad);
+        values.put(DataBase.ProductsEntry.CantidadAlerta, CantidadAlerta);
+        return values;
     }
 }
 
