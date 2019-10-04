@@ -8,31 +8,31 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
 
-    private List<Products> productsList;
+    private ArrayList<Products> productsList;
 
 
-    public Adapter(List<Products> productsList) {
+    public Adapter(ArrayList<Products> productsList) {
         this.productsList = productsList;
     }
 
 
     @NonNull
     @Override
-    public Viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public Adapter.Viewholder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_layout,viewGroup,false);
         return new Viewholder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull Viewholder viewholder, int position) {
-        String name = productsList.get(position).getNombre();
-        String code = productsList.get(position).getCodigo();
-        String cant = productsList.get(position).getCantidad();
-        viewholder.setData(name,code,cant);
+        viewholder.Nombre.setText(productsList.get(position).getNombre());
+        viewholder.Cantidad.setText(productsList.get(position).getCantidad());
+        viewholder.Codigo.setText(productsList.get(position).getCodigo());
     }
 
     @Override
@@ -49,14 +49,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
 
         public Viewholder(@NonNull View itemView) {
             super(itemView);
-
-
-        }
-
-        private void setData(String titleText, String codeText, String cantidadText) {
-            Nombre.setText(titleText);
-            Cantidad.setText(codeText);
-            Codigo.setText(cantidadText);
+            Nombre = itemView.findViewById(R.id.Nombre);
+            Cantidad = itemView.findViewById(R.id.Cantidad);
+            Codigo = itemView.findViewById(R.id.Codigo);
         }
     }
 

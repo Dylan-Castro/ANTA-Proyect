@@ -20,13 +20,17 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-
         recyclerView.setLayoutManager(layoutManager);
-
-        List<Products> ProductList = new ArrayList<>();
-        ProductList.add(new Products(R.layout.item_layout,""));
-
+        recyclerView.setNestedScrollingEnabled(false);
+        ArrayList<Products> ProductList = new ArrayList<>();
+        ProductList.add(new Products("Codigo", "Nombre",
+                "Test", "Test", "Test", "Test", "Cantidad", "Test"));
+        ProductList.add(new Products("Codigo", "Nombre",
+                "Test", "Test", "Test", "Test", "Cantidad", "Test"));
+        ProductList.add(new Products("Codigo", "Nombre",
+                "Test", "Test", "Test", "Test", "Cantidad", "Test"));
+        ProductList.add(new Products("Codigo", "Nombre",
+                "Test", "Test", "Test", "Test", "Cantidad", "Test"));
         Adapter adapter = new Adapter(ProductList);
         recyclerView.setAdapter(adapter);
 
