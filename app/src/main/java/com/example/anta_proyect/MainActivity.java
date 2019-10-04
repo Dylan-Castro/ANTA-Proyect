@@ -44,9 +44,17 @@ public class MainActivity extends AppCompatActivity {
                 Scaner();
             }
         });
-        //AddProduct();
         ProductList = SearchProducts("0","");
         ShowFilterResult(ProductList);
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        Button AddProduct = findViewById(R.id.button2);
+        AddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), activity_insert.class);
+                startActivity(intent);
+            }
+        });
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         EditText editText = (EditText) findViewById(R.id.editText);
         editText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -70,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         rv.setNestedScrollingEnabled(false);
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(new Adapter(ProductList));
-        Toast.makeText(this, String.valueOf(ProductList.size()), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, String.valueOf(ProductList.size()), Toast.LENGTH_SHORT).show();
     }
     void Scaner(){
         IntentIntegrator integrator = new IntentIntegrator(this);
@@ -87,19 +95,6 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Toast.makeText(this, "No scan data received!", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    void AddProduct() {
-        DataBase admin = new DataBase(this);
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        for (int x = 0; x<1000000; x++){
-            Products product = new Products("Dylan", "Test", "Test"
-                    , "Test", "Test", "Test", "Test", "Test");
-            bd.insert("Inventario", null, product.toContentValues());
-            ProductList.add(product);
-        }
-        bd.close();
-        Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
     }
 
     ArrayList<Products> SearchProducts(String Limit, String Filter) {
@@ -127,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                                 Filter + "' or  PrecioVenta='" + Filter + "' or  Cantidad='" + Filter + "' LIMIT " + Limit, null);
             }
         }
-
+        Log.e("test", "test");
         if (cursor.moveToFirst()) {
             ProductList.clear();
             while (cursor.moveToNext()) {
@@ -135,31 +130,16 @@ public class MainActivity extends AppCompatActivity {
                         , cursor.getString(3), cursor.getString(4), cursor.getString(5),
                         cursor.getString(6), cursor.getString(7), cursor.getString(8));
                 ProductList.add(products);
-                Log.e("codigo", products.getCodigo());
-                //Toast.makeText(this, cursor.getString(1), Toast.LENGTH_SHORT).show();
+                Log.e("test", Filter+"test2");
+                Toast.makeText(this, cursor.getString(1), Toast.LENGTH_SHORT).show();
             }
         } else {
             Toast.makeText(this, "No existe ningún producto con los datos ingresados",
                     Toast.LENGTH_SHORT).show();
-            bd.close();
+            Log.e("test", Filter+"test3");
         }
+        bd.close();
+        Log.e("test", "test4");
         return ProductList;
-
-    }
-
-    void DeleteProducts(String Codigo) {
-
-        DataBase admin = new DataBase(this);
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        bd.delete("Inventario", "Codigo=" + Codigo, null);
-        bd.close();
-        Toast.makeText(this, "Producto eliminado con éxito",Toast.LENGTH_SHORT).show();
-    }
-    void UpdateProduct(Products products){
-        DataBase admin = new DataBase(this);
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        bd.update("Inventario",products.toContentValues(), "Codigo=" + products.getCodigo(), null);
-        bd.close();
-        Toast.makeText(this, "Producto Modificado con éxito",Toast.LENGTH_SHORT).show();
     }
 }

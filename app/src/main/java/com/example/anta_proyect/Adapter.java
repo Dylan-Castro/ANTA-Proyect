@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
 
@@ -40,16 +39,16 @@ public class Adapter extends RecyclerView.Adapter<Adapter.Viewholder> {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(v.getContext(), Details.class);
-               /* intent.putExtra("ProductCodigo", productsList.get(position).getCodigo());
+                intent.putExtra("ProductCodigo", productsList.get(position).getCodigo());
                 intent.putExtra("ProductNombre", productsList.get(position).getNombre());
                 intent.putExtra("ProductMarca", productsList.get(position).getMarca());
                 intent.putExtra("ProductCategoria", productsList.get(position).getCategoria());
                 intent.putExtra("ProductCosto", productsList.get(position).getCosto());
                 intent.putExtra("ProductPrecioVenta", productsList.get(position).getPrecioVenta());
                 intent.putExtra("ProductCantidad", productsList.get(position).getCantidad());
-                intent.putExtra("ProductCantidadAlerta", productsList.get(position).getCantidadAlerta());*/
-
+                intent.putExtra("ProductCantidadAlerta", productsList.get(position).getCantidadAlerta());
                 context.startActivity(intent);
+                //Toast.makeText(context, String.valueOf(position), Toast.LENGTH_SHORT).show();
             }
         });
     }
